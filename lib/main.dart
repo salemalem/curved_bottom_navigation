@@ -19,6 +19,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _currentIndex = 1;
+
+  Widget callPage(int currentIndex) {
+    switch(currentIndex) {
+      case 0:
+//        return PageOne();
+        break;
+      case 1:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -31,22 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
          ),
        ),
      ),
-     body: Container(
-       color: Colors.deepOrange,
-       height: MediaQuery.of(context).size.height,
-       width:  MediaQuery.of(context).size.width,
-       child: Column(
-         mainAxisAlignment: MainAxisAlignment.center,
-         children: <Widget>[
-           Text(
-             'this is just a demo app',
-             style: TextStyle(
-               color: Colors.white
-             ),
-           )
-         ],
-       ),
-     ),
+     body: callPage(_currentIndex),
      bottomNavigationBar: CurvedNavigationBar(
        items: <Widget>[
          Icon(
@@ -64,21 +61,15 @@ class _MyHomePageState extends State<MyHomePage> {
        backgroundColor: Colors.deepOrange,
        buttonBackgroundColor: Colors.deepOrange,
        onTap: (index) {
-         switch(index) {
-           case 0:
-             return MaterialApp(
-               title: 'Bottom Navigation View',
-               home: MyHomePage(),
-             );
-             break;
-
-         }
+         setState(() {
+          callPage(index);
+         });
        },
        animationDuration: Duration(
          milliseconds: 200,
        ),
        animationCurve: Curves.easeIn,
-       index: 1,
+       index: _currentIndex,
      ),
    );
   }
